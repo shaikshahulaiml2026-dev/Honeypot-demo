@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Honeypot Demo</title>
+<style>body{font-family:Arial;background:#0f172a;color:#fff;padding:20px;text-align:center}button{padding:14px 20px;margin:8px;border:0;border-radius:10px;font-size:16px;font-weight:bold} .on{background:#22c55e} .off{background:#ef4444;color:#fff} .atk{background:#fff} #log{background:#020617;text-align:left;padding:15px;border-radius:10px;margin-top:15px;min-height:120px;white-space:pre-wrap}</style></head>
+<body>
+<h1>🍯 Honeypot Demo</h1>
+<p>Guard: <b id="st">OFF</b></p>
+<button class="off" id="gbtn" onclick="toggle()">Turn Guard ON</button><br>
+<button class="atk" onclick="attack(1)">Attack 1 - SQL Injection</button>
+<button class="atk" onclick="attack(2)">Attack 2 - XSS</button>
+<button class="atk" onclick="attack(3)">Attack 3 - Brute Force</button>
+<div id="log">Logs will appear here...</div>
+<script>
+let guard=false;
+function toggle(){guard=!guard;document.getElementById('st').innerText=guard?'ON':'OFF';let b=document.getElementById('gbtn');b.innerText=guard?'Turn Guard OFF':'Turn Guard ON';b.className=guard?'on':'off';log('Guard turned '+(guard?'ON ✅':'OFF ❌'))}
+function log(m){document.getElementById('log').innerText+= '\n> '+m}
+function attack(n){let names={1:'SQL Injection',2:'XSS Attack',3:'Brute Force'};if(guard){log('BLOCKED 🛡️ '+names[n]+' - Attacker trapped in Honeypot! IP Logged: 192.168.1.'+(10+n))}else{log('LEAKED 💥 '+names[n]+' - Data Stolen! No Protection!')}}
+</script></body></html>
